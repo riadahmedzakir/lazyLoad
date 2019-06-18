@@ -1,9 +1,10 @@
-var gulp = require('gulp');
-var csso = require('gulp-csso');
-var uglify = require('gulp-uglify');
-var htmlmin = require('gulp-htmlmin');
-var clean = require('gulp-clean');
+const gulp = require('gulp');
+const csso = require('gulp-csso');
+const uglify = require('gulp-uglify');
+const htmlmin = require('gulp-htmlmin');
+const clean = require('gulp-clean');
 const fs = require('fs');
+const loop = require('wait-loop');
 
 var dist = 'dist/';
 var appDirectory = 'app/'
@@ -32,6 +33,33 @@ function getApps() {
 
 gulp.task('uglify-js', function () {
     console.log(getApps());
+
+    var stream = loop.each(getApps(), function (appName) {
+        //an async call to read a file
+        require('fs').readFile(appName + "/controller/*" + ".js", 'UTF-8', (err, resp) => {
+
+            //call next(err) if there is an error
+            if (err) {
+                loop.next(err);
+            }
+            else {
+
+                //Code goes here
+                loop.next();
+            }
+        }); //end of read file
+    }); //end of loop.each   
+
+    loop.on(err => {
+        //our error should be undefined for successful completion
+        if (err) {
+            log(err);
+        }
+        else {
+            log("Success");
+        }
+    });
+    return stream;
     // return gulp.src('C:/Users/Riad.ahmed/Desktop/To-Do-List-master/javascript/*.js')
     //     .pipe(uglify())
     //     .pipe(gulp.dest('C:/Users/Riad.ahmed/Desktop/To-Do-List-master/dist/javascript'))
