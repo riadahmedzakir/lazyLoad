@@ -5,7 +5,8 @@ var htmlmin = require('gulp-htmlmin');
 var clean = require('gulp-clean');
 const fs = require('fs');
 
-var dist = 'dist';
+var dist = 'dist/';
+var appDirectory = 'app/'
 
 // gulp.task('clean-directory', function () {
 //     console.log("Cleaning old build files");
@@ -21,19 +22,20 @@ var dist = 'dist';
 //             sourceMap: true,
 //             debug: true
 //         }))
-//         .pipe(gulp.dest(dist + '/style'));
+//         .pipe(gulp.dest(dist + 'style'));
 // });
 
-gulp.task('test', function () {
-    var files = fs.readdirSync('app/');
-    console.log(files);
-})
+function getApps() {
+    var apps = fs.readdirSync(appDirectory);
+    return apps;
+}
 
-// gulp.task('uglify-js', function () {
-//     return gulp.src('C:/Users/Riad.ahmed/Desktop/To-Do-List-master/javascript/*.js')
-//         .pipe(uglify())
-//         .pipe(gulp.dest('C:/Users/Riad.ahmed/Desktop/To-Do-List-master/dist/javascript'))
-// });
+gulp.task('uglify-js', function () {
+    console.log(getApps());
+    // return gulp.src('C:/Users/Riad.ahmed/Desktop/To-Do-List-master/javascript/*.js')
+    //     .pipe(uglify())
+    //     .pipe(gulp.dest('C:/Users/Riad.ahmed/Desktop/To-Do-List-master/dist/javascript'))
+});
 
 // gulp.task('minify-html', function () {
 //     return gulp.src('C:/Users/Riad.ahmed/Desktop/To-Do-List-master/index.html')
@@ -47,4 +49,4 @@ gulp.task('test', function () {
 // });
 
 // gulp.task('default', gulp.series('clean-directory', 'minify-css', 'uglify-js', 'minify-html', 'dependency-files'));
-gulp.task('default', gulp.series('test'));
+gulp.task('default', gulp.series('uglify-js'));

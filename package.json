@@ -15,10 +15,12 @@
     "angularjs": "0.0.1",
     "gulp": "^4.0.2",
     "gulp-clean": "^0.4.0",
+    "gulp-concat": "^2.6.1",
     "gulp-csso": "^3.0.1",
     "gulp-htmlmin": "^5.0.1",
     "gulp-uglify": "^3.0.2",
     "live-server": "^1.2.1",
-    "oclazyload": "^1.1.0"
+    "oclazyload": "^1.1.0",
+    "wait-loop": "^1.0.0"
   }
 }
