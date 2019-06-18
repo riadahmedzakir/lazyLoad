@@ -3,25 +3,31 @@ var csso = require('gulp-csso');
 var uglify = require('gulp-uglify');
 var htmlmin = require('gulp-htmlmin');
 var clean = require('gulp-clean');
+const fs = require('fs');
 
 var dist = 'dist';
 
-gulp.task('clean-directory', function () {
-    console.log("Cleaning old build files");
-    return gulp.src('dist', { read: false })
-        .pipe(clean());
-});
+// gulp.task('clean-directory', function () {
+//     console.log("Cleaning old build files");
+//     return gulp.src('dist', { read: false })
+//         .pipe(clean());
+// });
 
-gulp.task('minify-css', function () {
-    console.log("Minifying css files");
-    return gulp.src('style/*.css')
-        .pipe(csso({
-            restructure: false,
-            sourceMap: true,
-            debug: true
-        }))
-        .pipe(gulp.dest(dist + '/style'));
-});
+// gulp.task('minify-css', function () {
+//     console.log("Minifying css files");
+//     return gulp.src('style/*.css')
+//         .pipe(csso({
+//             restructure: false,
+//             sourceMap: true,
+//             debug: true
+//         }))
+//         .pipe(gulp.dest(dist + '/style'));
+// });
+
+gulp.task('test', function () {
+    var files = fs.readdirSync('app/');
+    console.log(files);
+})
 
 // gulp.task('uglify-js', function () {
 //     return gulp.src('C:/Users/Riad.ahmed/Desktop/To-Do-List-master/javascript/*.js')
@@ -41,4 +47,4 @@ gulp.task('minify-css', function () {
 // });
 
 // gulp.task('default', gulp.series('clean-directory', 'minify-css', 'uglify-js', 'minify-html', 'dependency-files'));
-gulp.task('default', gulp.series('clean-directory', 'minify-css'));
+gulp.task('default', gulp.series('test'));
